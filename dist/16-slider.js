@@ -65,6 +65,18 @@
 	console.log(game.grid);
 	game.right();
 	console.log(game.grid);
+	game.left();
+	console.log(game.grid);
+	game.left();
+	console.log(game.grid);
+	game.left();
+	console.log(game.grid);
+	game.left();
+	console.log(game.grid);
+	game.left();
+	console.log(game.grid);
+	game.left();
+	console.log(game.grid);
 
 /***/ },
 /* 1 */
@@ -134,7 +146,16 @@
 
 	  }, {
 	    key: 'left',
-	    value: function left() {}
+	    value: function left() {
+	      if (this.blank > 0 && (this.blank - 1) % this._col !== this._col - 1) {
+	        this._grid[this.blank] = this._grid[this.blank - 1];
+	        this.blank--;
+	        this._grid[this.blank] = 0;
+	        return true;
+	      } else {
+	        return false;
+	      }
+	    }
 
 	    /* Attempt to move the blank tile up */
 

@@ -37,7 +37,14 @@ class slider {
 
   /* Attempt to move the blank tile left */
   left() {
-
+    if (this.blank > 0 && (this.blank - 1) % this._col !== this._col - 1) {
+      this._grid[this.blank] = this._grid[this.blank - 1];
+      this.blank--;
+      this._grid[this.blank] = 0;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /* Attempt to move the blank tile up */
