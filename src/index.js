@@ -1,7 +1,15 @@
-class slider {
-  constructor() {
+import Game from './16-slider';
 
-  }
-}
+const game = new Game();
 
-export default slider;
+console.log(game.grid);
+game.right();
+console.log(game.grid);
+game.right();
+console.log(game.grid);
+game.right();
+console.log(game.grid);
+game.right();
+console.log(game.grid);
+game.right();
+console.log(game.grid);
