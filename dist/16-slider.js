@@ -54,7 +54,6 @@
 
 	var game = new _slider2.default();
 
-	console.log(game.grid);
 	game.right();
 	console.log(game.grid);
 	game.right();
@@ -63,19 +62,25 @@
 	console.log(game.grid);
 	game.right();
 	console.log(game.grid);
+	game.down();
+	console.log(game.grid);
+	game.left();
+	console.log(game.grid);
+	game.left();
+	console.log(game.grid);
+	game.left();
+	console.log(game.grid);
+	game.left();
+	console.log(game.grid);
+	game.down();
+	console.log(game.grid);
 	game.right();
 	console.log(game.grid);
-	game.left();
+	game.right();
 	console.log(game.grid);
-	game.left();
+	game.right();
 	console.log(game.grid);
-	game.left();
-	console.log(game.grid);
-	game.left();
-	console.log(game.grid);
-	game.left();
-	console.log(game.grid);
-	game.left();
+	game.right();
 	console.log(game.grid);
 
 /***/ },
@@ -161,13 +166,31 @@
 
 	  }, {
 	    key: 'up',
-	    value: function up() {}
+	    value: function up() {
+	      if (this.blank >= this._col) {
+	        this._grid[this.blank] = this._grid[this.blank - this._col];
+	        this.blank -= this._col;
+	        this._grid[this.blank] = 0;
+	        return true;
+	      } else {
+	        return false;
+	      }
+	    }
 
 	    /* Attempt to move the blank tile down */
 
 	  }, {
 	    key: 'down',
-	    value: function down() {}
+	    value: function down() {
+	      if (Math.floor(this.blank / this._col) < this._row - 1) {
+	        this._grid[this.blank] = this._grid[this.blank + this._col];
+	        this.blank += this._col;
+	        this._grid[this.blank] = 0;
+	        return true;
+	      } else {
+	        return false;
+	      }
+	    }
 	  }, {
 	    key: 'resetGrid',
 	    value: function resetGrid() {

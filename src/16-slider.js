@@ -49,12 +49,26 @@ class slider {
 
   /* Attempt to move the blank tile up */
   up() {
-
+    if (this.blank >= this._col) {
+      this._grid[this.blank] = this._grid[this.blank - this._col];
+      this.blank -= this._col;
+      this._grid[this.blank] = 0;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /* Attempt to move the blank tile down */
   down() {
-
+    if (Math.floor(this.blank / this._col) < this._row - 1) {
+      this._grid[this.blank] = this._grid[this.blank + this._col];
+      this.blank += this._col;
+      this._grid[this.blank] = 0;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   resetGrid() {
