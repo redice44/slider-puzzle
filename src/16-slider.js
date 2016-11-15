@@ -1,12 +1,3 @@
-import _ from 'lodash';
-
-const direction = {
-  'left': 0,
-  'right': 1,
-  'up': 2,
-  'down': 3
-};
-
 const initGrid = (r, c) => {
   let g = [];
   for(let i=0; i < r*c; i++) {
@@ -71,11 +62,25 @@ class slider {
     }
   }
 
-  resetGrid() {
-    _.forEach(this.grid, (tile, key) => {
-      tile = key;
-    });
-    console.log(this.grid);
+  shuffleGrid(iterations = 1000) {
+    for (let i = 0; i < iterations; i++) {
+      switch(Math.floor(Math.random() * 4)) {
+        case 0:
+          this.right();
+          break;
+        case 1:
+          this.left();
+          break;
+        case 2:
+          this.up();
+          break;
+        case 3:
+          this.down();
+          break;
+        default:
+          // Do nothing
+      }
+    }
   }
 
   get grid() {
