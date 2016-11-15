@@ -89,6 +89,13 @@ class slider {
     });
   }
 
+  resetGrid() {
+    for (let i = 0; i < this._grid.length; i++) {
+      this._grid[i] = i;
+    }
+    this._blank = 0;
+  }
+
   get grid() {
     return this._grid;
   }

@@ -151,54 +151,58 @@
 	  });
 	};
 
+	var win = function win() {
+	  console.log('Winner!');
+	  removeListeners();
+	};
+
 	var rightTileListener = function rightTileListener() {
-	  console.log('right clicked');
 	  removeListeners();
 	  game.right();
 	  setListeners();
 	  updateGrid();
 	  if (game.isComplete()) {
-	    console.log('game complete');
+	    win();
 	  }
 	};
 
 	var leftTileListener = function leftTileListener() {
-	  console.log('left clicked');
 	  removeListeners();
 	  game.left();
 	  setListeners();
 	  updateGrid();
 	  if (game.isComplete()) {
-	    console.log('game complete');
+	    win();
 	  }
 	};
 
 	var upTileListener = function upTileListener() {
-	  console.log('up clicked');
 	  removeListeners();
 	  game.up();
 	  setListeners();
 	  updateGrid();
 	  if (game.isComplete()) {
-	    console.log('game complete');
+	    win();
 	  }
 	};
 
 	var downTileListener = function downTileListener() {
-	  console.log('down clicked');
 	  removeListeners();
 	  game.down();
 	  setListeners();
 	  updateGrid();
 	  if (game.isComplete()) {
-	    console.log('game complete');
+	    win();
 	  }
 	};
+
+	var resetGame = function resetGame() {};
 
 	var init = function init() {
 	  var root = document.getElementById('game');
 	  root.appendChild(makeGrid(rows, cols));
 	  game.shuffleGrid();
+	  game.resetGrid();
 	  updateGrid();
 	  setListeners();
 	};
@@ -330,6 +334,14 @@
 	      return this._grid.every(function (tile, index) {
 	        return tile === index;
 	      });
+	    }
+	  }, {
+	    key: "resetGrid",
+	    value: function resetGrid() {
+	      for (var i = 0; i < this._grid.length; i++) {
+	        this._grid[i] = i;
+	      }
+	      this._blank = 0;
 	    }
 	  }, {
 	    key: "grid",

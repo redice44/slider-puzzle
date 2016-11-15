@@ -97,56 +97,62 @@ const updateGrid = () => {
     let tile = document.getElementById(`tile-${index}`);
     tile.innerHTML = value;
   });
-}
+};
+
+const win = () => {
+  console.log('Winner!');
+  removeListeners();
+};
 
 const rightTileListener = () => {
-  console.log('right clicked');
   removeListeners();
   game.right();
   setListeners();
   updateGrid();
   if (game.isComplete()) {
-    console.log('game complete');
+    win();
   }
 };
 
 const leftTileListener = () => {
-  console.log('left clicked');
   removeListeners();
   game.left();
   setListeners();
   updateGrid();
   if (game.isComplete()) {
-    console.log('game complete');
+    win();
   }
 };
 
 const upTileListener = () => {
-  console.log('up clicked');
   removeListeners();
   game.up();
   setListeners();
   updateGrid();
   if (game.isComplete()) {
-    console.log('game complete');
+    win();
   }
 };
 
 const downTileListener = () => {
-  console.log('down clicked');
   removeListeners();
   game.down();
   setListeners();
   updateGrid();
   if (game.isComplete()) {
-    console.log('game complete');
+    win();
   }
+};
+
+const resetGame = () => {
+
 };
 
 const init = () => {
   let root = document.getElementById('game');
   root.appendChild(makeGrid(rows, cols));
   game.shuffleGrid();
+  game.resetGrid();
   updateGrid();
   setListeners();
 };
