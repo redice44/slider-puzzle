@@ -96,7 +96,11 @@ const updateGrid = () => {
   let grid = game.grid;
   grid.forEach((value, index) => {
     let tile = document.getElementById(`tile-${index}`);
-    tile.style.backgroundPosition = `-${Math.floor(400 / cols) * (value % cols)}px -${Math.floor(400 / rows) * Math.floor(value / rows)}px`;
+    if (value !== 0) {
+      tile.style.backgroundPosition = `-${Math.floor(400 / cols) * (value % cols)}px -${Math.floor(400 / rows) * Math.floor(value / rows)}px`;
+    } else {
+      tile.style.backgroundPosition = `100px 100px`;
+    }
     tile.innerHTML = value;
   });
 };

@@ -26,22 +26,19 @@
   background-repeat: no-repeat;
 }
 
-.tile:hover {
-  background-color: #EAEAEA;
+
+.up:hover {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/grid.jpg');
 }
 
-.up {
-  background-color: #90C3D4;
+.right:hover {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/grid.jpg');
 }
 
-.right {
-  background-color: #D4A190;
+.down:hover {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/grid.jpg');
 }
 
-.down {
-  background-color: #A1D490;
-}
-
-.left {
-  background-color: #C390D4;
+.left:hover {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/grid.jpg');
 }
