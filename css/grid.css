@@ -1,3 +1,27 @@
-.row {
+.grid {
+  height: 400px;
+  width: 400px;
+  box-sizing: border-box;
   display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+
+}
+
+.row {
+  height: 100px;
+  display: flex;
+}
+
+.tile {
+  width: 100px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tile:hover {
+  background-color: #EAEAEA;
 }
