@@ -10,16 +10,16 @@ class slider {
   constructor(r = 4, c = 4) {
     this._row = r;
     this._col = c;
-    this.blank = 0; // position of the blank tile
+    this._blank = 0; // position of the blank tile
     this._grid = initGrid(r, c);
   }
 
   /* Attempt to move the blank tile right */
   right() {
-    if ((this.blank + 1) % this._col !== 0) {
-      this._grid[this.blank] = this._grid[this.blank + 1];
-      this.blank++;
-      this._grid[this.blank] = 0;
+    if ((this._blank + 1) % this._col !== 0) {
+      this._grid[this._blank] = this._grid[this._blank + 1];
+      this._blank++;
+      this._grid[this._blank] = 0;
       return true;
     } else {
       return false;
@@ -28,10 +28,10 @@ class slider {
 
   /* Attempt to move the blank tile left */
   left() {
-    if (this.blank > 0 && (this.blank - 1) % this._col !== this._col - 1) {
-      this._grid[this.blank] = this._grid[this.blank - 1];
-      this.blank--;
-      this._grid[this.blank] = 0;
+    if (this._blank > 0 && (this._blank - 1) % this._col !== this._col - 1) {
+      this._grid[this._blank] = this._grid[this._blank - 1];
+      this._blank--;
+      this._grid[this._blank] = 0;
       return true;
     } else {
       return false;
@@ -40,10 +40,10 @@ class slider {
 
   /* Attempt to move the blank tile up */
   up() {
-    if (this.blank >= this._col) {
-      this._grid[this.blank] = this._grid[this.blank - this._col];
-      this.blank -= this._col;
-      this._grid[this.blank] = 0;
+    if (this._blank >= this._col) {
+      this._grid[this._blank] = this._grid[this._blank - this._col];
+      this._blank -= this._col;
+      this._grid[this._blank] = 0;
       return true;
     } else {
       return false;
@@ -52,10 +52,10 @@ class slider {
 
   /* Attempt to move the blank tile down */
   down() {
-    if (Math.floor(this.blank / this._col) < this._row - 1) {
-      this._grid[this.blank] = this._grid[this.blank + this._col];
-      this.blank += this._col;
-      this._grid[this.blank] = 0;
+    if (Math.floor(this._blank / this._col) < this._row - 1) {
+      this._grid[this._blank] = this._grid[this._blank + this._col];
+      this._blank += this._col;
+      this._grid[this._blank] = 0;
       return true;
     } else {
       return false;
@@ -85,6 +85,10 @@ class slider {
 
   get grid() {
     return this._grid;
+  }
+
+  get blank() {
+    return this._blank;
   }
 }
 

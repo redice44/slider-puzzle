@@ -59,6 +59,7 @@
 	var makeTile = function makeTile(i) {
 	  var tile = document.createElement('div');
 	  var text = document.createTextNode(i);
+	  tile.id = 'tile-' + i;
 	  tile.classList.add('tile');
 	  tile.appendChild(text);
 	  return tile;
@@ -78,9 +79,116 @@
 	  return grid;
 	};
 
+	var setListeners = function setListeners() {
+	  var blankPos = game.blank;
+
+	  /* Right */
+	  if ((blankPos + 1) % cols !== 0) {
+	    var rightTile = document.getElementById('tile-' + (blankPos + 1));
+	    rightTile.classList.add('right');
+	    rightTile.addEventListener('click', rightTileListener);
+	  }
+
+	  /* Left */
+	  if (blankPos > 0 && (blankPos - 1) % cols !== cols - 1) {
+	    var leftTile = document.getElementById('tile-' + (blankPos - 1));
+	    leftTile.classList.add('left');
+	    leftTile.addEventListener('click', leftTileListener);
+	  }
+
+	  /* Up */
+	  if (blankPos >= cols) {
+	    var upTile = document.getElementById('tile-' + (blankPos - cols));
+	    upTile.classList.add('up');
+	    upTile.addEventListener('click', upTileListener);
+	  }
+
+	  /* Down */
+	  if (Math.floor(blankPos / cols) < rows - 1) {
+	    var downTile = document.getElementById('tile-' + (blankPos + cols));
+	    downTile.classList.add('down');
+	    downTile.addEventListener('click', downTileListener);
+	  }
+	};
+
+	var removeListeners = function removeListeners() {
+	  var blankPos = game.blank;
+
+	  /* Right */
+	  if ((blankPos + 1) % cols !== 0) {
+	    var rightTile = document.getElementById('tile-' + (blankPos + 1));
+	    rightTile.classList.remove('right');
+	    rightTile.removeEventListener('click', rightTileListener);
+	  }
+
+	  /* Left */
+	  if (blankPos > 0 && (blankPos - 1) % cols !== cols - 1) {
+	    var leftTile = document.getElementById('tile-' + (blankPos - 1));
+	    leftTile.classList.remove('left');
+	    leftTile.removeEventListener('click', leftTileListener);
+	  }
+
+	  /* Up */
+	  if (blankPos >= cols) {
+	    var upTile = document.getElementById('tile-' + (blankPos - cols));
+	    upTile.classList.remove('up');
+	    upTile.removeEventListener('click', upTileListener);
+	  }
+
+	  /* Down */
+	  if (Math.floor(blankPos / cols) < rows - 1) {
+	    var downTile = document.getElementById('tile-' + (blankPos + cols));
+	    downTile.classList.remove('down');
+	    downTile.removeEventListener('click', downTileListener);
+	  }
+	};
+
+	var updateGrid = function updateGrid() {
+	  var grid = game.grid;
+	  grid.forEach(function (value, index) {
+	    var tile = document.getElementById('tile-' + index);
+	    tile.innerHTML = value;
+	  });
+	};
+
+	var rightTileListener = function rightTileListener() {
+	  console.log('right clicked');
+	  removeListeners();
+	  game.right();
+	  setListeners();
+	  updateGrid();
+	};
+
+	var leftTileListener = function leftTileListener() {
+	  console.log('left clicked');
+	  removeListeners();
+	  game.left();
+	  setListeners();
+	  updateGrid();
+	};
+
+	var upTileListener = function upTileListener() {
+	  console.log('up clicked');
+	  removeListeners();
+	  game.up();
+	  setListeners();
+	  updateGrid();
+	};
+
+	var downTileListener = function downTileListener() {
+	  console.log('down clicked');
+	  removeListeners();
+	  game.down();
+	  setListeners();
+	  updateGrid();
+	};
+
 	var init = function init() {
 	  var root = document.getElementById('game');
 	  root.appendChild(makeGrid(rows, cols));
+	  game.shuffleGrid();
+	  updateGrid();
+	  setListeners();
 	};
 
 	init();
@@ -116,7 +224,7 @@
 
 	    this._row = r;
 	    this._col = c;
-	    this.blank = 0; // position of the blank tile
+	    this._blank = 0; // position of the blank tile
 	    this._grid = initGrid(r, c);
 	  }
 
@@ -126,10 +234,10 @@
 	  _createClass(slider, [{
 	    key: "right",
 	    value: function right() {
-	      if ((this.blank + 1) % this._col !== 0) {
-	        this._grid[this.blank] = this._grid[this.blank + 1];
-	        this.blank++;
-	        this._grid[this.blank] = 0;
+	      if ((this._blank + 1) % this._col !== 0) {
+	        this._grid[this._blank] = this._grid[this._blank + 1];
+	        this._blank++;
+	        this._grid[this._blank] = 0;
 	        return true;
 	      } else {
 	        return false;
@@ -141,10 +249,10 @@
 	  }, {
 	    key: "left",
 	    value: function left() {
-	      if (this.blank > 0 && (this.blank - 1) % this._col !== this._col - 1) {
-	        this._grid[this.blank] = this._grid[this.blank - 1];
-	        this.blank--;
-	        this._grid[this.blank] = 0;
+	      if (this._blank > 0 && (this._blank - 1) % this._col !== this._col - 1) {
+	        this._grid[this._blank] = this._grid[this._blank - 1];
+	        this._blank--;
+	        this._grid[this._blank] = 0;
 	        return true;
 	      } else {
 	        return false;
@@ -156,10 +264,10 @@
 	  }, {
 	    key: "up",
 	    value: function up() {
-	      if (this.blank >= this._col) {
-	        this._grid[this.blank] = this._grid[this.blank - this._col];
-	        this.blank -= this._col;
-	        this._grid[this.blank] = 0;
+	      if (this._blank >= this._col) {
+	        this._grid[this._blank] = this._grid[this._blank - this._col];
+	        this._blank -= this._col;
+	        this._grid[this._blank] = 0;
 	        return true;
 	      } else {
 	        return false;
@@ -171,10 +279,10 @@
 	  }, {
 	    key: "down",
 	    value: function down() {
-	      if (Math.floor(this.blank / this._col) < this._row - 1) {
-	        this._grid[this.blank] = this._grid[this.blank + this._col];
-	        this.blank += this._col;
-	        this._grid[this.blank] = 0;
+	      if (Math.floor(this._blank / this._col) < this._row - 1) {
+	        this._grid[this._blank] = this._grid[this._blank + this._col];
+	        this._blank += this._col;
+	        this._grid[this._blank] = 0;
 	        return true;
 	      } else {
 	        return false;
@@ -208,6 +316,11 @@
 	    key: "grid",
 	    get: function get() {
 	      return this._grid;
+	    }
+	  }, {
+	    key: "blank",
+	    get: function get() {
+	      return this._blank;
 	    }
 	  }]);
 

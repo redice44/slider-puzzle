@@ -25,3 +25,19 @@
 .tile:hover {
   background-color: #EAEAEA;
 }
+
+.up {
+  background-color: #90C3D4;
+}
+
+.right {
+  background-color: #D4A190;
+}
+
+.down {
+  background-color: #A1D490;
+}
+
+.left {
+  background-color: #C390D4;
+}
