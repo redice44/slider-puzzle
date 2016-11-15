@@ -157,6 +157,9 @@
 	  game.right();
 	  setListeners();
 	  updateGrid();
+	  if (game.isComplete()) {
+	    console.log('game complete');
+	  }
 	};
 
 	var leftTileListener = function leftTileListener() {
@@ -165,6 +168,9 @@
 	  game.left();
 	  setListeners();
 	  updateGrid();
+	  if (game.isComplete()) {
+	    console.log('game complete');
+	  }
 	};
 
 	var upTileListener = function upTileListener() {
@@ -173,6 +179,9 @@
 	  game.up();
 	  setListeners();
 	  updateGrid();
+	  if (game.isComplete()) {
+	    console.log('game complete');
+	  }
 	};
 
 	var downTileListener = function downTileListener() {
@@ -181,6 +190,9 @@
 	  game.down();
 	  setListeners();
 	  updateGrid();
+	  if (game.isComplete()) {
+	    console.log('game complete');
+	  }
 	};
 
 	var init = function init() {
@@ -311,6 +323,13 @@
 	          // Do nothing
 	        }
 	      }
+	    }
+	  }, {
+	    key: "isComplete",
+	    value: function isComplete() {
+	      return this._grid.every(function (tile, index) {
+	        return tile === index;
+	      });
 	    }
 	  }, {
 	    key: "grid",

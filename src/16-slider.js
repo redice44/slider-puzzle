@@ -83,6 +83,12 @@ class slider {
     }
   }
 
+  isComplete() {
+    return this._grid.every((tile, index) => {
+      return tile === index;
+    });
+  }
+
   get grid() {
     return this._grid;
   }

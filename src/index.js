@@ -105,6 +105,9 @@ const rightTileListener = () => {
   game.right();
   setListeners();
   updateGrid();
+  if (game.isComplete()) {
+    console.log('game complete');
+  }
 };
 
 const leftTileListener = () => {
@@ -113,6 +116,9 @@ const leftTileListener = () => {
   game.left();
   setListeners();
   updateGrid();
+  if (game.isComplete()) {
+    console.log('game complete');
+  }
 };
 
 const upTileListener = () => {
@@ -121,6 +127,9 @@ const upTileListener = () => {
   game.up();
   setListeners();
   updateGrid();
+  if (game.isComplete()) {
+    console.log('game complete');
+  }
 };
 
 const downTileListener = () => {
@@ -129,6 +138,9 @@ const downTileListener = () => {
   game.down();
   setListeners();
   updateGrid();
+  if (game.isComplete()) {
+    console.log('game complete');
+  }
 };
 
 const init = () => {
