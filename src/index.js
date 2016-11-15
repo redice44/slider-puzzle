@@ -15,6 +15,7 @@ const makeTile = (i) => {
 
 const makeGrid = (r, c) => {
   let grid = document.createElement('div');
+  grid.id = 'grid';
   grid.classList.add('grid');
   for (let i = 0; i < r; i++) {
     let row = document.createElement('div');
@@ -95,6 +96,7 @@ const updateGrid = () => {
   let grid = game.grid;
   grid.forEach((value, index) => {
     let tile = document.getElementById(`tile-${index}`);
+    tile.style.backgroundPosition = `-${Math.floor(400 / cols) * (value % cols)}px -${Math.floor(400 / rows) * Math.floor(value / rows)}px`;
     tile.innerHTML = value;
   });
 };
@@ -145,16 +147,23 @@ const downTileListener = () => {
 };
 
 const resetGame = () => {
+  removeListeners();
+  game.resetGrid();
+  updateGrid();
+};
 
+const shuffleGame = () => {
+  game.shuffleGrid();
+  updateGrid();
+  setListeners();
 };
 
 const init = () => {
   let root = document.getElementById('game');
   root.appendChild(makeGrid(rows, cols));
-  game.shuffleGrid();
-  game.resetGrid();
   updateGrid();
-  setListeners();
+  document.getElementById('start-game').addEventListener('click', shuffleGame);
+  document.getElementById('reset-game').addEventListener('click', resetGame);
 };
 
 init();
